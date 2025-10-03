@@ -1,15 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./event_db');
+
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-// 1. Home page: Retrieve all active and non-past activities
+// GET /api/events —— Home page activity list (active + future date)
 app.get('/api/events', (req, res) => {
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
   const query = `
     SELECT e.*, c.name AS category_name, o.name AS org_name
     FROM events e
@@ -24,7 +25,7 @@ app.get('/api/events', (req, res) => {
   });
 });
 
-// 2. Obtain all categories (for use in the search dropdown box)
+// GET /api/categories —— All categories (for use in the search dropdown box)
 app.get('/api/categories', (req, res) => {
   db.query('SELECT * FROM categories', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -32,7 +33,7 @@ app.get('/api/categories', (req, res) => {
   });
 });
 
-// 3. Search activity (supporting date, location, category_id)
+// GET /api/events/search —— Search by conditions
 app.get('/api/events/search', (req, res) => {
   let { date, location, category_id } = req.query;
   let query = `
@@ -52,7 +53,7 @@ app.get('/api/events/search', (req, res) => {
     query += ' AND e.location LIKE ?';
     params.push(`%${location}%`);
   }
-  if (category_id) {
+  if (category_id && category_id !== '0') {
     query += ' AND e.category_id = ?';
     params.push(category_id);
   }
@@ -65,7 +66,7 @@ app.get('/api/events/search', (req, res) => {
   });
 });
 
-// 4. Obtain details of a single activity
+// GET /api/events/:id —— Details of a single activity
 app.get('/api/events/:id', (req, res) => {
   const id = req.params.id;
   const query = `
@@ -83,5 +84,5 @@ app.get('/api/events/:id', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`API server running on http://localhost:${PORT}`);
+  console.log(`🚀 API server running on http://localhost:${PORT}`);
 });
