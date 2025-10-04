@@ -1,5 +1,7 @@
+// server-side/server.js
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const db = require('./event_db');
 
 const app = express();
@@ -8,7 +10,15 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// GET /api/events —— Home page activity list (active + future date)
+// 静态文件服务：托管 client-side
+app.use(express.static(path.join(__dirname, '..', 'client-side')));
+
+// 根路径返回首页
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client-side', 'index.html'));
+});
+
+// API: 获取首页活动（active + 未来日期）
 app.get('/api/events', (req, res) => {
   const today = new Date().toISOString().split('T')[0];
   const query = `
@@ -25,7 +35,7 @@ app.get('/api/events', (req, res) => {
   });
 });
 
-// GET /api/categories —— All categories (for use in the search dropdown box)
+// API: 获取所有分类
 app.get('/api/categories', (req, res) => {
   db.query('SELECT * FROM categories', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -33,7 +43,7 @@ app.get('/api/categories', (req, res) => {
   });
 });
 
-// GET /api/events/search —— Search by conditions
+// API: 搜索活动
 app.get('/api/events/search', (req, res) => {
   let { date, location, category_id } = req.query;
   let query = `
@@ -53,11 +63,10 @@ app.get('/api/events/search', (req, res) => {
     query += ' AND e.location LIKE ?';
     params.push(`%${location}%`);
   }
-  if (category_id && category_id !== '0') {
+  if (category_id) {
     query += ' AND e.category_id = ?';
     params.push(category_id);
   }
-
   query += ' ORDER BY e.event_date ASC';
 
   db.query(query, params, (err, results) => {
@@ -66,7 +75,7 @@ app.get('/api/events/search', (req, res) => {
   });
 });
 
-// GET /api/events/:id —— Details of a single activity
+// API: 获取单个活动详情
 app.get('/api/events/:id', (req, res) => {
   const id = req.params.id;
   const query = `
@@ -83,6 +92,9 @@ app.get('/api/events/:id', (req, res) => {
   });
 });
 
+// 启动服务器
 app.listen(PORT, () => {
-  console.log(`🚀 API server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}/`);
+  console.log(`🏠 Homepage: http://localhost:${PORT}/`);
+  console.log(`🔧 API test: http://localhost:${PORT}/api/events`);
 });

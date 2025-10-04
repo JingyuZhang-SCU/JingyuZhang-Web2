@@ -3,33 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Search Events</title>
+    <title>Search Events - Hope Charity</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Hope for Children</h1>
-        <p>Search for an event to support</p>
-    </header>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="search.html">Search Events</a>
     </nav>
 
     <main>
+        <h2>Search Events</h2>
         <form id="search-form">
-            <label for="date">Event Date:</label>
+            <label for="date">Date:</label>
             <input type="date" id="date" name="date">
 
             <label for="location">Location:</label>
             <input type="text" id="location" name="location" placeholder="e.g., Central Park">
 
-            <label for="category">Category:</label>
-            <select id="category" name="category_id">
-                <option value="0">All Categories</option>
-                <!-- JS will populate -->
+            <label for="category_id">Category:</label>
+            <select id="category_id" name="category_id">
+                <option value="">All Categories</option>
+                <!-- 动态填充 -->
             </select>
 
             <button type="submit">Search</button>
@@ -38,10 +34,6 @@
 
         <div id="results"></div>
     </main>
-
-    <footer>
-        <p>Contact: info@hopeforchildren.org | &copy; 2025</p>
-    </footer>
 
     <script src="js/search.js"></script>
 </body>
