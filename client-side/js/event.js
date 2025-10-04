@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(`/api/events/${eventId}`)
     .then(res => res.json())
     .then(event => {
-      const progress = event.goal_amount > 0 
-        ? ((event.current_amount / event.goal_amount) * 100).toFixed(1)
+      const progressPercent = event.goal_amount > 0 
+        ? Math.min(100, ((event.current_amount / event.goal_amount) * 100).toFixed(1))
         : 0;
 
       document.getElementById('event-detail').innerHTML = `
@@ -27,9 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Location:</strong> ${event.location}</p>
         <p><strong>Description:</strong> ${event.description}</p>
         <p><strong>Ticket Price:</strong> $${event.ticket_price}</p>
-        <p><strong>Goal:</strong> $${event.goal_amount} | <strong>Raised:</strong> $${event.current_amount} (${progress}%)</p>
-        <div style="width:100%; background:#eee; height:20px; border-radius:10px;">
-          <div style="width:${progress}%; height:100%; background:#2ecc71;"></div>
+        <p><strong>Organisation:</strong> ${event.org_name}</p>
+        <p><strong>Fundraising Goal:</strong> $${event.goal_amount.toLocaleString()}</p>
+        <p><strong>Raised So Far:</strong> $${event.current_amount.toLocaleString()} (${progressPercent}%)</p>
+        <div class="progress-container">
+          <div class="progress-bar" style="width: ${progressPercent}%"></div>
         </div>
       `;
     })
