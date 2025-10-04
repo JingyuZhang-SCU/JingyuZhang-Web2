@@ -1,3 +1,4 @@
+/* Global Styles  */
 * {
     box-sizing: border-box;
 }
@@ -11,6 +12,7 @@ body {
     line-height: 1.6;
 }
 
+/* Navigation Styles */
 nav {
     background: #1a2530;
     padding: 0.8rem 2rem;
@@ -33,6 +35,7 @@ nav a:hover {
     color: #3498db;
 }
 
+/* Header Styles */
 header {
     background: linear-gradient(to right, #2980b9, #1a5276);
     color: white;
@@ -54,6 +57,7 @@ header p {
     opacity: 0.95;
 }
 
+/* Main Content Styles */
 main {
     max-width: 1000px;
     margin: 0 auto;
@@ -68,6 +72,7 @@ h2 {
     border-bottom: 2px solid #3498db;
 }
 
+/* Event Card Styles */
 .event-card {
     background: white;
     border-radius: 12px;
@@ -116,6 +121,7 @@ h2 {
     color: #219653;
 }
 
+/* Form Styles */
 form {
     background: white;
     padding: 2rem;
@@ -149,6 +155,7 @@ form select:focus {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/* Submit Button Styles */
 form button[type="submit"] {
     background: #3498db;
     color: white;
@@ -163,6 +170,7 @@ form button[type="submit"]:hover {
     background: #2980b9;
 }
 
+/* Clear Button Styles */
 #clear-btn {
     background: #e74c3c;
     color: white;
@@ -179,11 +187,13 @@ form button[type="submit"]:hover {
     background: #c0392b;
 }
 
+/* Results and Events Container Styles */
 #results,
 #events-container {
     margin-top: 1.5rem;
 }
 
+/* Register Button Styles */
 button#register-btn {
     background: #2ecc71;
     color: white;
@@ -203,6 +213,7 @@ button#register-btn:hover {
     transform: scale(1.03);
 }
 
+/* Progress Bar Styles */
 .progress-container {
     width: 100%;
     height: 20px;
@@ -219,6 +230,7 @@ button#register-btn:hover {
     transition: width 0.5s ease;
 }
 
+/* Last Child Margin */
 main>div:last-child {
     margin-bottom: 3rem;
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const db = require('./event_db');
+const db = require('./event_db'); // Database connection
 
 const app = express();
 const PORT = 3000;
@@ -9,14 +9,19 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from client-side directory
 app.use(express.static(path.join(__dirname, '..', 'client-side')));
 
+// Root route - serve homepage
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client-side', 'index.html'));
 });
 
+// API Endpoint: Get all active upcoming events
 app.get('/api/events', (req, res) => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0]; // Current date
+  
+  // SQL query to get active events from today onwards
   const query = `
     SELECT e.*, c.name AS category_name, o.name AS org_name
     FROM events e
@@ -25,12 +30,14 @@ app.get('/api/events', (req, res) => {
     WHERE e.status = 'active' AND e.event_date >= ?
     ORDER BY e.event_date ASC
   `;
+  
   db.query(query, [today], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results);
   });
 });
 
+// API Endpoint: Get all categories
 app.get('/api/categories', (req, res) => {
   db.query('SELECT * FROM categories', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -38,6 +45,7 @@ app.get('/api/categories', (req, res) => {
   });
 });
 
+// API Endpoint: Search events with filters
 app.get('/api/events/search', (req, res) => {
   let { date, location, category_id } = req.query;
   let query = `
@@ -49,6 +57,7 @@ app.get('/api/events/search', (req, res) => {
   `;
   const params = [];
 
+  // Build query based on provided filters
   if (date) {
     query += ' AND e.event_date = ?';
     params.push(date);
@@ -69,6 +78,7 @@ app.get('/api/events/search', (req, res) => {
   });
 });
 
+// API Endpoint: Get specific event by ID
 app.get('/api/events/:id', (req, res) => {
   const id = req.params.id;
   const query = `
@@ -85,6 +95,7 @@ app.get('/api/events/:id', (req, res) => {
   });
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
   console.log(`Homepage: http://localhost:${PORT}/`);

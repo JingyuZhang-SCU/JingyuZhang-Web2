@@ -1,3 +1,4 @@
+// Format date string to YYYY-MM-DD format
 function formatDate(dateString) {
   if (!dateString) return '';
   if (dateString.length === 10) return dateString;
@@ -5,16 +6,24 @@ function formatDate(dateString) {
   return isNaN(d) ? 'Invalid Date' : d.toISOString().split('T')[0];
 }
 
+// DOM Content Loaded Event Listener
 document.addEventListener('DOMContentLoaded', () => {
+  // Fetch events from API
   fetch('/api/events')
     .then(res => res.json())
     .then(events => {
       const container = document.getElementById('events-container');
+      
+      // Handle empty events array
       if (events.length === 0) {
         container.innerHTML = '<p>No upcoming events.</p>';
         return;
       }
+      
+      // Clear loading message
       container.innerHTML = '';
+      
+      // Create event cards for each event
       events.forEach(event => {
         const div = document.createElement('div');
         div.className = 'event-card';
@@ -30,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(err => {
+      // Handle fetch error
       document.getElementById('events-container').innerHTML = '<p>Error loading events.</p>';
     });
 });

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <!-- Navigation Bar -->
     <nav>
         <a href="index.html">Home</a>
         <a href="search.html">Search Events</a>
@@ -15,6 +16,8 @@
 
     <main>
         <h2>Search Events</h2>
+
+        <!-- Search Form -->
         <form id="search-form">
             <label for="date">Date:</label>
             <input type="date" id="date" name="date">
@@ -23,17 +26,21 @@
             <input type="text" id="location" name="location" placeholder="e.g., Central Park">
 
             <label for="category_id">Category:</label>
+            <!-- Category Dropdown - dynamically populated -->
             <select id="category_id" name="category_id">
                 <option value="">All Categories</option>
             </select>
 
             <button type="submit">Search</button>
+            <!-- Clear Filters Button -->
             <button type="button" id="clear-btn">Clear Filters</button>
         </form>
 
+        <!-- Search Results Container -->
         <div id="results"></div>
     </main>
 
+    <!-- Search Page JavaScript -->
     <script src="js/search.js"></script>
 </body>
 
