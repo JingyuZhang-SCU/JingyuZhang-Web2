@@ -1,14 +1,49 @@
-<form id="search-form">
-    <label>Date: <input type="date" name="date"></label>
-    <label>Location: <input type="text" name="location"></label>
-    <label>Category:
-        <select name="category_id">
-            <option value="">All</option>
+<!DOCTYPE html>
+<html lang="en">
 
-        </select>
-    </label>
-    <button type="submit">Search</button>
-    <button type="button" id="clear-btn">Clear Filters</button>
-</form>
-<div id="results"></div>
-<script src="js/search.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Hope for Children</h1>
+        <p>Search for an event to support</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="search.html">Search Events</a>
+    </nav>
+
+    <main>
+        <form id="search-form">
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="e.g., Central Park">
+
+            <label for="category">Category:</label>
+            <select id="category" name="category_id">
+                <option value="0">All Categories</option>
+                <!-- JS will populate -->
+            </select>
+
+            <button type="submit">Search</button>
+            <button type="button" id="clear-btn">Clear Filters</button>
+        </form>
+
+        <div id="results"></div>
+    </main>
+
+    <footer>
+        <p>Contact: info@hopeforchildren.org | &copy; 2025</p>
+    </footer>
+
+    <script src="js/search.js"></script>
+</body>
+
+</html>

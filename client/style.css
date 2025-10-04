@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #2c7a7b;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+nav {
+    background-color: #4fd1c5;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+nav a:hover {
+    background-color: #38b2ac;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.event-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.event-card h3 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.event-card p {
+    margin: 0.3rem 0;
+    color: #4a5568;
+}
+
+.event-card a {
+    display: inline-block;
+    margin-top: 0.6rem;
+    color: #3182ce;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.event-card a:hover {
+    text-decoration: underline;
+}
+
+form {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+label {
+    display: block;
+    margin: 0.8rem 0 0.4rem;
+    font-weight: bold;
+}
+
+input,
+select,
+button {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2c5aa0;
+}
+
+#clear-btn {
+    background-color: #e53e3e;
+}
+
+#clear-btn:hover {
+    background-color: #c53030;
+}
+
+.progress-bar {
+    height: 20px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    margin: 0.8rem 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #48bb78;
+    width: var(--progress);
+}
+
+.error,
+.empty {
+    color: #e53e3e;
+    font-style: italic;
+    margin: 1rem 0;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #edf2f7;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
