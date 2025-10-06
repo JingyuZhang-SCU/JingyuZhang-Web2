@@ -49,6 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Register button click handler
   document.getElementById('register-btn').onclick = () => {
-    alert('This feature is currently under construction.');
+    alert('This function will be further improved in A3. Please stay tuned!');
   };
 });
